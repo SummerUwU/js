@@ -11,6 +11,11 @@ class level2 extends Phaser.Scene {
   }
 
   preload() {
+
+//music
+this.load.audio("smallhit","assets/catmeow.mp3");
+this.load.audio("enemyhit","assets/enemyhit.mp3");
+
     ///////////////////////cat
     this.load.image("cat4", "assets/cat4.png");
     this.load.image("cat5", "assets/cat5.png");
@@ -31,6 +36,11 @@ class level2 extends Phaser.Scene {
 
   create() {
     console.log("*** level2 scene");
+
+    //music
+    this.collectSnd = this.sound.add("smallhit").setVolume(1);
+    this.hitSnd = this.sound.add("enemyhit").setVolume(0.5);
+
     let map = this.make.tilemap({ key: "level2" });
 
     let DesignTiles = map.addTilesetImage("Design", "DesignIMG");
@@ -132,8 +142,8 @@ this.tweens.add({
   repeat: -1
 });
 
-this.physics.add.overlap(this.player, this.Car_Enemy1, this.hitEnemy, null, this);
-this.physics.add.overlap(this.player, this.Car_Enemy2, this.hitEnemy, null, this);
+this.physics.add.overlap(this.player, this.Car_Enemy1, globalHitFire, null, this);
+this.physics.add.overlap(this.player, this.Car_Enemy2, globalHitFire, null, this);
 
 this.Car_Enemy1.body.setSize(this.Car_Enemy1.width * 0.4, this.Car_Enemy1.height * 0.4)
 this.Car_Enemy2.body.setSize(this.Car_Enemy2.width * 0.4, this.Car_Enemy2.height * 0.4)
@@ -182,7 +192,7 @@ collectcat(player, cat){
   console.log("collectcat");
 
   // play a sound
-  // this.hitSnd.play();
+  this.collectSnd.play();
 
   // shake screen
   this.cameras.main.shake(300);

@@ -35,4 +35,6 @@ class task extends Phaser.Scene {
       this
     );
   }
+  
 }
+

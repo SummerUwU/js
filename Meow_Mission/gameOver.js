@@ -13,7 +13,10 @@
      this.scene.bringToTop("gameOver");
   
     // Add image and detect spacebar keypress
-    this.add.image(0, 0, 'gameOverImg').setOrigin(0, 0);
+    this.add.image(0, 0, 'gameOverImg').setOrigin(0.5).setPosition(
+      this.game.config.width / 2,
+      this.game.config.height / 2
+    ).setScale(0.20);
   
     // Check for spacebar or any key here
     let enterDown = this.input.keyboard.addKey("ENTER");

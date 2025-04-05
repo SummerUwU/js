@@ -6,7 +6,7 @@
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
      scale: {
@@ -24,4 +24,4 @@
 let game = new Phaser.Game(config);
 // Add variables here
 window.heart = 3
-window.key = 0
+window.cat = 0

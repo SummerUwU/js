@@ -9,7 +9,9 @@ class world extends Phaser.Scene {
 
   preload() {
 
-
+//music
+this.load.audio("smallhit","assets/catmeow.mp3");
+this.load.audio("enemyhit","assets/enemyhit.mp3");
 
     // Step 1, load JSON
     //this.load.tilemapTiledJSON("world1", "assets/Tutorial1.json");
@@ -37,10 +39,16 @@ class world extends Phaser.Scene {
 this.load.image("cat1", "assets/cat1.png");
 this.load.image("cat2", "assets/cat2.png"); 
 this.load.image("cat3", "assets/cat3.png");     
+
+
   }
 
   create() {
     console.log("*** world scene");
+
+    //music
+    this.collectSnd = this.sound.add("smallhit").setVolume(1);
+    this.hitSnd = this.sound.add("enemyhit").setVolume(0.5);
 
     //Step 3 - Create the map from main
     //let map = this.make.tilemap({ key: "world1" });
@@ -220,8 +228,8 @@ this.tweens.add({
   repeat: -1
 });
 
-this.physics.add.overlap(this.player, this.enemy1, this.hitEnemy, null, this);
-this.physics.add.overlap(this.player, this.enemy2, this.hitEnemy, null, this);
+this.physics.add.overlap(this.player, this.enemy1, globalHitFire, null, this);
+this.physics.add.overlap(this.player, this.enemy2, globalHitFire, null, this);
 
 this.enemy1.body.setSize(this.enemy1.width * 0.4, this.enemy1.height * 0.4)
 this.enemy2.body.setSize(this.enemy2.width * 0.4, this.enemy2.height * 0.4)
@@ -259,6 +267,8 @@ this.enemy2.body.setSize(this.enemy2.width * 0.4, this.enemy2.height * 0.4)
       console.log("jmup to level2");
       this.level2();
     }
+
+
     }} /////////////////// end of update //////////////////////////////
 
 // Function level2
@@ -271,7 +281,7 @@ level2(player, tile) {
       console.log("collectcat");
       
 			// // play a sound
-      // this.hitSnd.play();
+      this.collectSnd.play();
 
 			// shake screen
 	    this.cameras.main.shake(300);    

@@ -11,6 +11,11 @@ class level3 extends Phaser.Scene {
   }
 
   preload() {
+
+//music
+this.load.audio("smallhit","assets/catmeow.mp3");
+this.load.audio("enemyhit","assets/enemyhit.mp3");
+
     this.load.spritesheet("Man", "assets/Man_spritesheet.png", {
       frameWidth: 64,
       frameHeight: 64,
@@ -29,6 +34,11 @@ class level3 extends Phaser.Scene {
 
   create() {
     console.log("*** level3 scene");
+
+//music
+this.collectSnd = this.sound.add("smallhit").setVolume(1);
+this.hitSnd = this.sound.add("enemyhit").setVolume(0.5);
+
     let map = this.make.tilemap({ key: "level3" });
 
     let TownTiles = map.addTilesetImage("TOWN", "TownIMG");
@@ -198,14 +208,14 @@ class level3 extends Phaser.Scene {
     this.physics.add.overlap(
       this.player,
       this.Man,
-      this.hitEnemy,
+      globalHitFire,
       null,
       this
     );
     this.physics.add.overlap(
       this.player,
       this.Man2,
-      this.hitEnemy,
+      globalHitFire,
       null,
       this
     );
@@ -254,7 +264,7 @@ winning(player, tile){
     console.log("collectcat");
 
     // play a sound
-    // this.hitSnd.play();
+    this.collectSnd.play();
 
     // shake screen
     this.cameras.main.shake(300);

@@ -24,23 +24,24 @@ function updateInventory() {
 // Uses a JS function to prevent repeated codes
 // 
 ///////////////////////////////////////////////////////
-function globalHitFire(player,item) {
+function globalHitFire(player,enemy) {
     console.log("*** player overlap fire");
    
     // Shake screen
    this.cameras.main.shake(100);
-   //this.hitenemySnd.play();
+
+   this.hitSnd.play();
 
     // deduct heart
     window.heart--;
-    item.disableBody(true, true);
+    enemy.disableBody(true, true);
     
     // Call globalFunctions.js updateInventory
     updateInventory.call(this)
 
   if (window.heart == 0){
     console.log("*** player gameOver");
-    this.scene.start("gameover");
+    this.scene.start("gameOver");
     //this.loselifeSnd.play();
   }
 }
@@ -57,7 +58,7 @@ function globalCollectKey(player,item) {
   // Shake screen
  this.cameras.main.shake(100);
 
- //this.hitenemySnd.play();
+//  this.hitenemySnd.play();
 
 // increase key count
   window.key++;

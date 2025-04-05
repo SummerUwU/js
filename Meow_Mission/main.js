@@ -11,6 +11,8 @@ class main extends Phaser.Scene {
     preload() {
 
         this.load.image('MeowMission', 'assets/MeowMission.jpg');
+        this.load.audio("bgmusic","assets/MeowMusic.mp3");
+        
 
         // Preload all the assets here
 
@@ -74,6 +76,7 @@ this.anims.create({
         let key1 = this.input.keyboard.addKey(49);
         let key2 = this.input.keyboard.addKey(50);
         let key3 = this.input.keyboard.addKey(51);
+        let key4 = this.input.keyboard.addKey(52);
         
 
         key1.on('down', function(){
@@ -88,6 +91,10 @@ this.anims.create({
             this.scene.start("level3");
             }, this );   
 
+            key4.on('down', function(){
+                this.scene.start("gameOver");
+                }, this ); 
+
         // On spacebar event, call the world scene        
         spaceDown.on('down', function () {
             console.log('Jump to story');
@@ -98,6 +105,10 @@ this.anims.create({
 
                 }
             );
+            // turn on loop, adjust the volume
+this.bgMusic = this.sound.add("bgmusic",{loop: true}).setVolume(0.06);
+// start the background musicc
+this.bgMusic.play();
         }, this);
 
 

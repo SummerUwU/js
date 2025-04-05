@@ -20,6 +20,8 @@ class story extends Phaser.Scene {
     howplay.setPosition(
       this.game.config.width / 2,
       this.game.config.height / 2
+
+      
     );
 
     console.log("This is task spacebar"); //this.input.once('pointerdown', function(){
@@ -31,6 +33,7 @@ class story extends Phaser.Scene {
       function () {
         console.log("Spacebar pressed, go to task");
         this.scene.start("task");
+
       },
       this
     );
